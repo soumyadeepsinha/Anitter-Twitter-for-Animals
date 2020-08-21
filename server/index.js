@@ -27,8 +27,8 @@ app.get('/ans', (req, res) => {
 })
 
 function isValid(animal) {
-  return mew.name && mew.name.toString().trim() !== '' && mew.name.toString().trim().length <= 50 &&
-    mew.content && mew.content.toString().trim() !== '' && mew.content.toString().trim().length <= 140
+  return animal.name && animal.name.toString().trim() !== '' && animal.name.toString().trim().length <= 50 &&
+    animal.content && animal.content.toString().trim() !== '' && animal.content.toString().trim().length <= 140
 }
 
 app.post('/ans', (req, res) => {
