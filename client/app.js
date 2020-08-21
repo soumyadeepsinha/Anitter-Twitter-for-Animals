@@ -36,7 +36,7 @@ form.addEventListener('submit', (e) => {
         console.log(createdAnimal);
         form.reset();
         form.style.display = '';
-        loadingElement.style.display = 'none';
+        listAllanitters();
       })
   } catch (error) {
     console.log(error);
@@ -44,10 +44,12 @@ form.addEventListener('submit', (e) => {
 })
 
 function listAllanitters() {
+  aniterElement.innerHTML = '';
   fetch(API_URL)
     .then(response => response.json())
     .then(anitters => {
       console.log(anitters);
+      anitters.reverse();
       anitters.forEach(animal => {
         // create a new div to show anitters
         const div = document.createElement('div');
