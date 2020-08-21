@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const monk = require('monk')
+const Filter = require('bad-words')
+const rateLimit = require('express-rate-limit')
 
 const app = express()
 // all incoming requests are coming through cors middleware
@@ -11,6 +13,8 @@ app.use(express.json())
 const db = monk(process.env.MONGO_URI || 'localhost/animlsgossip')
 // create a collection
 const anitters = db.get('anitters')
+// create a filter
+const filter = new Filter()
 
 app.get('/', (req, res) => {
   res.json({
@@ -31,12 +35,18 @@ function isValid(animal) {
     animal.content && animal.content.toString().trim() !== '' && animal.content.toString().trim().length <= 140
 }
 
+// limit the number of post 
+app.use(rateLimit({
+  windowMs: 30 * 1000, // 30 seconds
+  max: 100
+}))
+
 app.post('/ans', (req, res) => {
   if (isValid(req.body)) {
     // crate a object
     const anms = {
-      name: req.body.name.toString(),
-      content: req.body.content.toString(),
+      name: filter.clean(req.body.name.toString()),
+      content: filter.clean(req.body.content.toString()),
       created: new Date()
     }
     // insert to database

@@ -73,7 +73,7 @@
   - [x] Reverse iterate over
   - [x] Show the form
   - [x] Hide loading spinner
-- [] fetch GET /ans after creating a post
+- [x] fetch GET /ans after creating a post
 
 * ✅ Retrive data from a Server on the Client using Fetch
 * ✅ Hide/Show elements on the Client
@@ -83,7 +83,7 @@
 
 ## Back-end
 
-- [] npm install bad-words
-- [] Use filter before inserting to database
-- [] npm install express-rate-limit
-  - [] Limit to 1 request per 15 seconds
+- [x] npm install bad-words
+- [x] Use filter before inserting to database
+- [x] npm install express-rate-limit
+  - [x] Limit to 1 request per 15 seconds

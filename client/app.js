@@ -35,7 +35,10 @@ form.addEventListener('submit', (e) => {
       .then(createdAnimal => {
         console.log(createdAnimal);
         form.reset();
-        form.style.display = '';
+        // hide form for 30 seconds
+        setTimeout(() => {
+          form.style.display = '';
+        }, 30000);
         listAllanitters();
       })
   } catch (error) {
