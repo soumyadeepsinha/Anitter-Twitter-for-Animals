@@ -1,12 +1,12 @@
 const form = document.querySelector('form');
-
 const loadingElement = document.querySelector('.loading');
-
-// const aniterElement = document.querySelector('.anitters')
+const aniterElement = document.querySelector('.anitters')
 
 const API_URL = 'http://localhost:5000/ans';
 
-loadingElement.style.display = 'none';
+loadingElement.style.display = '';
+
+listAllanitters()
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -15,7 +15,8 @@ form.addEventListener('submit', (e) => {
   const content = fomData.get('content');
   // create a content
   const animal = {
-    name, content
+    name,
+    content
   }
 
   // hide form and show loading.gif
@@ -41,3 +42,24 @@ form.addEventListener('submit', (e) => {
     console.log(error);
   }
 })
+
+function listAllanitters() {
+  fetch(API_URL)
+    .then(response => response.json())
+    .then(anitters => {
+      console.log(anitters);
+      anitters.forEach(animal => {
+        const div = document.createElement('div');
+        const header = document.createElement('h3');
+        header.textContent = animal.name;
+        const contents = document.createElement('p');
+        contents.textContent = animal.content;
+
+        div.appendChild(header);
+        div.appendChild(contents);
+
+        aniterElement.appendChild(div);
+      })
+      loadingElement.style.display = 'none';
+    })
+}

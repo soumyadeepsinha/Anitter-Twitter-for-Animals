@@ -2,13 +2,12 @@ const express = require('express')
 const cors = require('cors')
 const monk = require('monk')
 
-require('dotenv').config()
-
-// all incoming requests are coming through cors middleware
 const app = express()
+// all incoming requests are coming through cors middleware
 app.use(cors())
+// body parser middleware
 app.use(express.json())
-
+//create a database
 const db = monk(process.env.MONGO_URI || 'localhost/animlsgossip')
 // create a collection
 const anitters = db.get('anitters')
@@ -19,8 +18,17 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/ans', (req, res) => {
+  anitters
+    .find()
+    .then(anitters => {
+      res.json(anitters)
+    })
+})
+
 function isValid(animal) {
-  return animal.name && animal.name.toString().trim() !== '' && animal.content && animal.content.toString().trim() !== ''
+  return mew.name && mew.name.toString().trim() !== '' && mew.name.toString().trim().length <= 50 &&
+    mew.content && mew.content.toString().trim() !== '' && mew.content.toString().trim().length <= 140
 }
 
 app.post('/ans', (req, res) => {
@@ -43,6 +51,13 @@ app.post('/ans', (req, res) => {
     })
   }
 })
+
+app.use((error, req, res, next) => {
+  res.status(500);
+  res.json({
+    message: error.message
+  });
+});
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {

@@ -51,4 +51,4 @@
   - [x] npm install monk
   - [x] Connect to Database
   - [x] Create a Collection
-  * [x] Inser user input to database
+  * [x] Insert user input to database
