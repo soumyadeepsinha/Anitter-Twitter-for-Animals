@@ -49,15 +49,22 @@ function listAllanitters() {
     .then(anitters => {
       console.log(anitters);
       anitters.forEach(animal => {
+        // create a new div to show anitters
         const div = document.createElement('div');
+        // create h3 tag for name
         const header = document.createElement('h3');
         header.textContent = animal.name;
+        // create p tag for content
         const contents = document.createElement('p');
         contents.textContent = animal.content;
+        // create small tag for date
+        const date = document.createElement('small');
+        date.textContent = Date(animal.created);
 
         div.appendChild(header);
         div.appendChild(contents);
-
+        div.appendChild(date);
+        // apply all changes to the div in index page
         aniterElement.appendChild(div);
       })
       loadingElement.style.display = 'none';
