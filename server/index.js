@@ -3,6 +3,7 @@ const cors = require('cors')
 const monk = require('monk')
 const Filter = require('bad-words')
 const rateLimit = require('express-rate-limit')
+require('dotenv').config()
 
 const app = express()
 // all incoming requests are coming through cors middleware

@@ -51,7 +51,6 @@ function listAllanitters() {
   fetch(API_URL)
     .then(response => response.json())
     .then(anitters => {
-      console.log(anitters);
       anitters.reverse();
       anitters.forEach(animal => {
         // create a new div to show anitters
